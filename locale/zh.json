@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenCode 会话头补全",
+    "description": "为缺少会话 id 的 opencode 请求补一个稳定的 x-opencode-session 值，让自动审查不再因 MissingSessionID 失败。"
+  }
+}

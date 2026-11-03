@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OpenCode Session Header Fix",
+    "description": "Adds a stable x-opencode-session value to opencode requests that arrive without a session id, so Auto review stops failing with MissingSessionID."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "dsh-opencode-session-fix",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Supplies x-opencode-session for opencode routes whose request carries no session id, so Auto review stops failing with MissingSessionID.",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "icon": "./icon.svg",
+  "author": "imx123",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imx123/dsh-opencode-session-fix.git"
+  },
+  "homepage": "https://github.com/imx123/dsh-opencode-session-fix#readme",
+  "bugs": {
+    "url": "https://github.com/imx123/dsh-opencode-session-fix/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "cordis-plugin",
+    "opencode",
+    "opencode-go",
+    "auto-review"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "manifestVersion": 1
+  }
+}

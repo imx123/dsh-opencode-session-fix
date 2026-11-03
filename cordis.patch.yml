@@ -1,0 +1,7 @@
+# Bundle patch layer: the reviewer request path is repaired by wrapping the
+# registered opencode adapter, so this bundle inserts exactly one Host row and
+# has no Client half. Users may override the row in their profile
+# cordis.patch.yml to set `config.providers` or `config.sessionId`.
+- insert:
+    - id: opencode-session-fix
+      name: dsh-opencode-session-fix
