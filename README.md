@@ -88,14 +88,17 @@ refuses it): **Settings → Plugins → install**, then give the absolute path t
 this directory (`file:` or `link:`). The row `opencode-session-fix` should
 appear as enabled.
 
-Other profiles, from this repository:
+From source (the package is not published to npm, so it does not appear in the
+in-app plugin center):
 
 ```powershell
-dsh plugin --profile <name> add github:imx123/dsh-opencode-session-fix
-dsh --profile <name> --dump-config
+dsh plugin --profile web add github:imx123/dsh-opencode-session-fix
+dsh --profile web --dump-config
 ```
 
-Or from a local checkout: `dsh plugin --profile <name> add "<path to this directory>"`.
+Swap `web` for your profile name; the dump should contain
+`- id: opencode-session-fix`. A local checkout works too:
+`dsh plugin --profile web add "<path to this directory>"`.
 
 ## Configuration
 
@@ -118,12 +121,27 @@ node test/wrapper.test.mjs
 ```
 
 Real device: enable Auto review (`EXP`), select an `opencode-go` model, let a
-`write` be reviewed. `MissingSessionID` must be gone, and the tool must either
-run or be denied by the reviewer's own decision.
+`write` be reviewed. The session log shows the gate that decides it:
+
+```
+{"type":"permission/preset","seq":286,"time":1793718502130,"data":{"preset":"auto"}}
+```
+
+and that reviewed `write` returned normally instead of
+`auto-review of tool "write" failed ... 400 MissingSessionID`.
 
 Regression: the main conversation's `x-opencode-session` must still equal the
 real session id (not the plugin's id). Uninstalling the plugin must bring the
 `400` back — the patch is reversible.
+
+## Risk and scope
+
+Process-local only: no network calls of its own, no credentials, no disk writes,
+no session events. The plugin wraps one object inside the running Host and
+restores it when unloaded, so the only thing it can influence is the
+`x-opencode-session` header of the configured provider routes.
+
+This is a community plugin, not affiliated with or endorsed by DeepSeek.
 
 ## Limits
 

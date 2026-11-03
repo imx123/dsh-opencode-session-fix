@@ -77,14 +77,15 @@ adapter 形状写的伪造实现，专门盯这个坑。
 填本目录的绝对路径（`file:` 或 `link:`）。列表里应出现已启用的
 `opencode-session-fix` 行。
 
-其它 profile，直接从本仓库装：
+源码安装（包没有发到 npm，所以不会出现在应用内的「插件中心」）：
 
 ```powershell
-dsh plugin --profile <名字> add github:imx123/dsh-opencode-session-fix
-dsh --profile <名字> --dump-config
+dsh plugin --profile web add github:imx123/dsh-opencode-session-fix
+dsh --profile web --dump-config
 ```
 
-本地目录也行：`dsh plugin --profile <名字> add "<本目录路径>"`。
+把 `web` 换成你自己的 profile 名即可，dump 里应出现 `- id: opencode-session-fix`。
+本地目录也行：`dsh plugin --profile web add "<本目录路径>"`。
 
 ## 配置
 
@@ -106,10 +107,25 @@ node test/wrapper.test.mjs
 ```
 
 真机：开自动审查（`EXP`），选 `opencode-go` 模型，让一次 `write` 被审查。
-`MissingSessionID` 应消失，工具要么正常执行、要么按风险判定被拒。
+会话日志里能看到把关的预设：
+
+```
+{"type":"permission/preset","seq":286,"time":1793718502130,"data":{"preset":"auto"}}
+```
+
+而那一次受审的 `write` 正常返回，不再是
+`auto-review of tool "write" failed ... 400 MissingSessionID`。
 
 回归：主对话的 `x-opencode-session` 仍应等于真实 session id（不是插件的 id）。
 卸载插件后 `400` 应该回来，说明补丁可逆。
+
+## 风险与范围
+
+只作用于进程内：自己不联网、不碰凭据、不写盘、不写会话事件。插件包裹的是宿主
+进程里的一个对象，卸载时还原，所以它能影响的只有配置路由上那个
+`x-opencode-session` 请求头。
+
+社区插件，与 DeepSeek 官方无隶属关系。
 
 ## 边界
 
