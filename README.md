@@ -9,6 +9,10 @@
 >
 > 中文文档：[README.zh.md](./README.zh.md)
 
+> **Fixed upstream in DSH 0.2.2.** This plugin exists only as a patch for older
+> releases (0.2.1-rc.5 and earlier). It is not maintained against newer
+> versions, and on 0.2.2+ it is a no-op that can be removed.
+
 A Host-only plugin for DeepSeek Harness that repairs one specific failure: with
 the **Auto review** permission preset (`EXP`) and an opencode family provider as
 the current model, every reviewed tool call fails before its body runs:
@@ -150,7 +154,7 @@ This is a community plugin, not affiliated with or endorsed by DeepSeek.
 | --- | --- |
 | Internal field | `ctx.llm.adapters` is a public class field of the `llm` service, but not a documented extension point; a rename degrades to a warning. |
 | Shared bucket | All repaired requests share one id. opencode uses it for routing/caching only, so behaviour is correct while cache locality is coarser than a real session. |
-| Upstream fix | If `dsh-experimental-auto-review` later passes its own `sessionId`, the plugin becomes a no-op and can be removed. |
+| Upstream fix | Already fixed upstream: DSH 0.2.2's `auto-review` passes its own `sessionId` (`fix(auto-review): route review requests by their Session`, 6fcb9b6c). This plugin is a patch for 0.2.1 and earlier and is not updated for newer versions. |
 | Not done here | No change to `app.asar`, no session id for unrelated providers, no `llm/stream` attempt to rewrite `options`. |
 
 ## License

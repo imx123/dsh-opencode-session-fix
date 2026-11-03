@@ -9,6 +9,9 @@
 >
 > English documentation: [README.md](./README.md)
 
+> **DSH 0.2.2 已修复该问题。** 本插件只作为旧版本（0.2.1-rc.5 及更早）的补丁存在，
+> 不随新版本继续更新；在 0.2.2+ 上是 no-op，可以直接卸载。
+
 一个只管宿主的 DSH 插件，修的是这一个具体故障：权限模式选**自动审查**（`EXP`）、
 当前模型走 opencode 系 provider 时，每一次受审工具调用都在执行前失败：
 
@@ -134,7 +137,7 @@ node test/wrapper.test.mjs
 | --- | --- |
 | 依赖内部字段 | `ctx.llm.adapters` 是 `llm` 服务的公开类字段，但不是文档化的扩展点；真被改名时插件退化为 warn。 |
 | 共享桶 | 所有被修补的请求共用一个 id。opencode 只拿它做路由/缓存，功能正常，但缓存粒度不如真实会话。 |
-| 上游修复 | 若 `dsh-experimental-auto-review` 以后自己带上 `sessionId`，本插件自动变成 no-op，可安全卸载。 |
+| 上游修复 | 已经修了：DSH 0.2.2 起 `auto-review` 自己带上 `sessionId`（`fix(auto-review): route review requests by their Session`，6fcb9b6c）。本插件定位是 0.2.1 及更早版本的补丁，不随新版本更新。 |
 | 没有做的事 | 不改 `app.asar`；不给无关 provider 灌 id；不在 `llm/stream` 里尝试改 `options`。 |
 
 ## 许可
