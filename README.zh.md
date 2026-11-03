@@ -1,5 +1,6 @@
 # dsh-opencode-session-fix
 
+[![npm](https://img.shields.io/npm/v/dsh-opencode-session-fix.svg)](https://www.npmjs.com/package/dsh-opencode-session-fix)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 > 实测环境：DSH Desktop **0.2.1-rc.5**（Windows 11，Node 26.12.1），profile 内启用
@@ -73,19 +74,19 @@ adapter 形状写的伪造实现，专门盯这个坑。
 
 ## 安装
 
-桌面版（`desktop` profile 由 Electron 独占，CLI 会拒绝）：**设置 → 插件 → 安装**，
-填本目录的绝对路径（`file:` 或 `link:`）。列表里应出现已启用的
-`opencode-session-fix` 行。
-
-源码安装（包没有发到 npm，所以不会出现在应用内的「插件中心」）：
-
 ```powershell
-dsh plugin --profile web add github:imx123/dsh-opencode-session-fix
+dsh plugin --profile web add dsh-opencode-session-fix
 dsh --profile web --dump-config
 ```
 
-把 `web` 换成你自己的 profile 名即可，dump 里应出现 `- id: opencode-session-fix`。
-本地目录也行：`dsh plugin --profile web add "<本目录路径>"`。
+把 `web` 换成你自己的 profile 名，dump 里应出现 `- id: opencode-session-fix`。
+包已发到 npm，应用内「插件中心」也能直接搜到。
+
+桌面版（`desktop` profile 由 Electron 独占，CLI 会拒绝）：**设置 → 插件 → 安装**，
+填包名 `dsh-opencode-session-fix`，或本仓库地址。
+
+源码安装（不走 npm）：`dsh plugin --profile web add github:imx123/dsh-opencode-session-fix`，
+或本地目录路径。
 
 ## 配置
 

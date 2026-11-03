@@ -1,10 +1,13 @@
 {
   "name": "dsh-opencode-session-fix",
   "version": "0.1.0",
-  "private": true,
   "description": "Supplies x-opencode-session for opencode routes whose request carries no session id, so Auto review stops failing with MissingSessionID.",
   "type": "module",
   "main": "./lib/index.js",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "exports": {
     ".": "./lib/index.js",
     "./locale/*.json": "./locale/*.json",

@@ -1,5 +1,6 @@
 # dsh-opencode-session-fix
 
+[![npm](https://img.shields.io/npm/v/dsh-opencode-session-fix.svg)](https://www.npmjs.com/package/dsh-opencode-session-fix)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 > Tested on DSH Desktop **0.2.1-rc.5** (Windows 11, Node 26.12.1), profile bundle
@@ -83,22 +84,22 @@ suite in `test/wrapper.test.mjs` reproduces exactly this adapter shape.
 
 ## Install
 
-Desktop (the `desktop` profile is owned by the Electron shell, so the CLI
-refuses it): **Settings → Plugins → install**, then give the absolute path to
-this directory (`file:` or `link:`). The row `opencode-session-fix` should
-appear as enabled.
-
-From source (the package is not published to npm, so it does not appear in the
-in-app plugin center):
-
 ```powershell
-dsh plugin --profile web add github:imx123/dsh-opencode-session-fix
+dsh plugin --profile web add dsh-opencode-session-fix
 dsh --profile web --dump-config
 ```
 
 Swap `web` for your profile name; the dump should contain
-`- id: opencode-session-fix`. A local checkout works too:
-`dsh plugin --profile web add "<path to this directory>"`.
+`- id: opencode-session-fix`. The package is published to npm, so it is also
+available in the in-app plugin center.
+
+Desktop: the `desktop` profile is owned by the Electron shell and the CLI
+refuses it. Use **Settings → Plugins → install** with the package name
+`dsh-opencode-session-fix`, or with this repository's URL.
+
+Source install without npm:
+`dsh plugin --profile web add github:imx123/dsh-opencode-session-fix`, or a local
+checkout path.
 
 ## Configuration
 
